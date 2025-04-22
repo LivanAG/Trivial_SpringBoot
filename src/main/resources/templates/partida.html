@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Partida</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 1em;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .pregunta {
+            margin-bottom: 20px;
+        }
+
+        .pregunta p {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .opcion label {
+            display: block;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+
+        input[type="submit"] {
+            margin-top: 20px;
+            background-color: #ffffff;
+            color: #4facfe;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.1em;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #e0f7ff;
+            transform: scale(1.05);
+        }
+
+        .error {
+            color: #ffbaba;
+            background-color: #d8000c;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Responde las preguntas</h1>
+
+<div th:if="${error}" class="error">
+    <h4 th:text="${error}"></h4>
+</div>
+
+<form action="/partida" method="post">
+
+    <div th:each="p : ${preguntas}" class="pregunta">
+        <p th:text="${p.pregunta}"></p>
+
+        <div th:each="op : ${p.opciones}" class="opcion">
+            <label>
+                <input type="radio"
+                       th:name="${p.id_pregunta}"
+                       th:value="${op.idOpcion}" />
+                <span th:text="${op.enunciado}"></span>
+            </label>
+        </div>
+    </div>
+
+    <input type="submit" value="Enviar">
+</form>
+
+</body>
+</html>
