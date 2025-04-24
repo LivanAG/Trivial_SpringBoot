@@ -89,6 +89,9 @@
 
 <form action="/partida" method="post">
 
+    <!-- 🔐 Token CSRF obligatorio para formularios POST en Spring Security -->
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
     <div th:each="p : ${preguntas}" class="pregunta">
         <p th:text="${p.pregunta}"></p>
 

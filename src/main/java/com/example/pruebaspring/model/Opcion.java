@@ -14,6 +14,17 @@ public class Opcion {
     private boolean esCorrecta;
     private Long idPregunta;
 
+
+
+
+
+
+
+
+
+
+
+
     public Long getIdPregunta() {
         return idPregunta;
     }

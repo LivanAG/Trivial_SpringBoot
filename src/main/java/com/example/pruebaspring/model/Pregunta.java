@@ -7,12 +7,16 @@ import java.util.List;
 
 @Entity
 public class Pregunta {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_pregunta;
     private String pregunta;
     @OneToMany(mappedBy = "idPregunta", cascade = CascadeType.ALL)
     private List<Opcion> opciones;
+
+
+
 
     public Long getId_pregunta() {
         return id_pregunta;

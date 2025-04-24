@@ -13,8 +13,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            height: 100vh;
+            padding: 40px;
+            min-height: 100vh;
             text-align: center;
         }
 
@@ -25,10 +25,10 @@
 
         h3 {
             font-weight: normal;
-            margin-bottom: 2em;
+            margin-bottom: 1.5em;
         }
 
-        a button {
+        button {
             background-color: #ffffff;
             color: #4facfe;
             border: none;
@@ -37,21 +37,74 @@
             border-radius: 12px;
             cursor: pointer;
             transition: 0.3s ease;
+            margin: 10px;
         }
 
-        a button:hover {
+        button:hover {
             background-color: #e0f7ff;
             transform: scale(1.05);
+        }
+
+        .ranking-table {
+            margin-top: 3em;
+            width: 90%;
+            max-width: 700px;
+            border-collapse: collapse;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .ranking-table th,
+        .ranking-table td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .ranking-table th {
+            background-color: rgba(255, 255, 255, 0.2);
+            font-weight: bold;
+        }
+
+        .ranking-table td {
+            font-size: 1.1em;
         }
     </style>
 </head>
 <body>
 
+<!-- 🔐 Botón de logout -->
+<form th:action="@{/logout}" method="post" style="margin-top: 2em;">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+    <button type="submit">Cerrar sesión</button>
+</form>
+
 <h1>Bienvenido</h1>
+
+<p th:text="${user}"></p>
 
 <h3>¿Quieres jugar una partida?</h3>
 
 <a href="/partida"><button>Jugar</button></a>
+
+<!-- 🎖️ Tabla de ranking -->
+<table class="ranking-table" th:if="${ranking}">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Partidas jugadas</th>
+        <th>Puntuación promedio</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="r : ${ranking}">
+        <td th:text="${r.jugador}"></td>
+        <td th:text="${r.noPartidas}"></td>
+        <td th:text="${#numbers.formatDecimal(r.puntuacion, 1, 2)}"></td>
+    </tr>
+    </tbody>
+</table>
 
 </body>
 </html>

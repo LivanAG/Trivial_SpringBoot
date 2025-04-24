@@ -10,13 +10,23 @@ import java.util.Date;
 @Entity
 public class Partida {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idPartida;
-    private String jugador;
+    private long jugador;
 
     private int puntuacion;
     private Date date;
+
+
+
+
+
+
+
+
+
 
     public Partida() {
         this.date = new Date();
@@ -30,11 +40,11 @@ public class Partida {
         this.idPartida = idPartida;
     }
 
-    public String getJugador() {
+    public long getJugador() {
         return jugador;
     }
 
-    public void setJugador(String jugador) {
+    public void setJugador(long jugador) {
         this.jugador = jugador;
     }
 
