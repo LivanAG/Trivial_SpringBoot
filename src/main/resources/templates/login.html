@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar Sesión</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 1em;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+
+        input[type="submit"] {
+            background-color: #ffffff;
+            color: #4facfe;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.1em;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #e0f7ff;
+            transform: scale(1.02);
+        }
+
+        .error {
+            color: #ffbaba;
+            background-color: #d8000c;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Iniciar Sesión</h1>
+
+<div th:if="${param.error}" class="error">
+    Usuario o contraseña incorrectos.
+</div>
+
+<form th:action="@{/login}" method="post">
+    <input type="text" name="username" placeholder="Usuario" required />
+    <input type="password" name="password" placeholder="Contraseña" required />
+    <input type="submit" value="Entrar">
+</form>
+
+</body>
+</html>
